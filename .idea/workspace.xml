@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bfc1b35f-7351-498a-80a3-c0b5a01f3510" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Dealer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Hand.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Player.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Strategy.py" afterDir="false" />
-    </list>
+    <list default="true" id="bfc1b35f-7351-498a-80a3-c0b5a01f3510" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,7 +35,7 @@
       <file leaf-file-name="Hand.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Hand.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
+            <state relative-caret-position="345">
               <caret line="23" column="17" lean-forward="true" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -101,8 +95,8 @@
       <file leaf-file-name="Strategy.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Strategy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+            <state relative-caret-position="105">
+              <caret line="7" selection-start-line="7" selection-end-line="8" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -405,13 +399,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dealer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="25" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Game.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="56">
@@ -422,16 +409,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Dealer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="25" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Strategy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="7" selection-end-line="8" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Hand.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
+        <state relative-caret-position="345">
           <caret line="23" column="17" lean-forward="true" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
