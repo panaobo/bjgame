@@ -10,4 +10,10 @@ class Card:
         return self.suit
 
     def get_value(self):
-        return self.value
+        if self.value.isnumeric():
+            return int(self.value)
+        elif self.value == "A":
+            return 1
+        else:
+            return 10
+

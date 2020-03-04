@@ -1,10 +1,13 @@
 import collections
 import json
 
+
 class Hand:
     def __init__(self):
         self.cards = collections.defaultdict(list)
-        self.value = {1: 0}
+        # index 0 means hard hand
+        # index 1 means soft hand
+        self.value = collections.defaultdict(list)
 
     def add_card(self, card, hand):
         self.cards[hand].append(card)
@@ -14,25 +17,30 @@ class Hand:
     # Calculate value on every card draw
     #
     def calculate_value(self, card, hand):
-        has_ace = False
-        if card.value.isnumeric():
-            self.value[hand] += int(card.value)
+        # Dealing the first 2 cards
+        card_value = card.get_value()
+        if len(self.value[hand]) == 0:
+            self.value[hand].insert(0, card_value)
+            self.value[hand].insert(1, 11 if card_value == 1 else card_value)
         else:
-            if card.value == "A":
-                has_ace = True
-                self.value[hand] += 11
-            else:
-                self.value[hand] += 10
-
-        if has_ace and self.value[hand] > 21:
-            self.value -= 10
+            self.value[hand][0] += card_value
+            self.value[hand][1] += 11 if card_value == 1 else card_value
 
     # TODO
     def split_card(self):
         return self.cards
 
-    def get_value_by_hand(self, hand):
-        return self.value[hand]
+    def get_max_by_hand(self, hand):
+        if 21 >= self.get_soft_hand(hand) > self.get_hard_hand(hand):
+            return self.get_soft_hand(hand)
+        else:
+            return self.get_hard_hand(hand)
+
+    def get_hard_hand(self, hand):
+        return self.value[hand][0]
+
+    def get_soft_hand(self, hand):
+        return self.value[hand][1]
 
     def display(self):
         print("***** Player Hands *****")
@@ -42,6 +50,3 @@ class Hand:
             for value in values:
                 print(value)
         print("***** End Player Hands *****")
-
-
-

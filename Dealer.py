@@ -1,4 +1,5 @@
-import Strategy
+from Strategy import Strategy
+
 
 class Dealer:
     def __init__(self, hand):
