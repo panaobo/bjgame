@@ -1,7 +1,9 @@
 class Player:
 
-    def __init__(self, hand):
-        self.hand = hand
+    def __init__(self, name, hands):
+        self.hands = hands
+        self.name = name
 
     def display(self):
-        self.hand.display("Player")
+        for hand in self.hands:
+            hand.display(self.name)

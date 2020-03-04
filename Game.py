@@ -7,6 +7,7 @@ from Strategy import Strategy
 
 class Game:
     num_of_decks = 6
+    initial_card_num = 2
 
     def __init__(self):
         self.deck = Deck()
@@ -14,7 +15,8 @@ class Game:
         self.deck.shuffle()
         # 1 Dealer with 1 Player
         self.dealer = Dealer(Hand())
-        self.player = Player(Hand())
+        # Player can have multiple hands
+        self.player = Player("tutu", [Hand()])
         # Control the whole game
         self.playing = True
         # Control one hand
@@ -25,9 +27,10 @@ class Game:
     def play(self):
 
         while self.playing:
-            for i in range(2):
-                self.dealer.hand.add_card(self.deck.deal(), 1)
-                self.player.hand.add_card(self.deck.deal(), 1)
+            for i in range(self.initial_card_num):
+                self.dealer.hand.add_card(self.deck.deal())
+                # TODO
+                self.player.hands[0].add_card(self.deck.deal())
 
             self.player.display()
             print()
@@ -36,8 +39,6 @@ class Game:
             self.check_blackjack()
 
             while not self.game_over:
-                hand_num = 1
-
                 # Player's turn
                 print()
                 choice = input("Please enter 'hit' or 'stand' (or H/S) ").lower()
@@ -45,13 +46,13 @@ class Game:
 
                     if choice in ['hit', 'h']:
                         print("___Player Hit___")
-                        self.player.hand.add_card(self.deck.deal(), hand_num)
+                        self.player.hands[0].add_card(self.deck.deal())
                         self.player.display()
                     elif choice in ['stand', 's']:
                         self.player_turn = False
                         break
 
-                    if self.player_is_over(hand_num):
+                    if self.player_is_over():
                         self.game_over = True
                         self.player_turn = False
                         print("You Lost!")
@@ -63,29 +64,32 @@ class Game:
                     self.dealer.show_all()
                 else:
                     Strategy.dealer_strategy(self.dealer.hand, self.deck)
-                    self.check_final_result(hand_num)
+                    self.check_final_result()
                     self.game_over = True
             self.play_again()
 
     def check_blackjack(self):
-        if self.player.hand.get_max_by_hand(1) == 21 or self.dealer.hand.get_max_by_hand(1) == 21:
+        # TODO
+        if self.player.hands[0].get_max_by_hand() == 21 or self.dealer.hand.get_max_by_hand() == 21:
             print("game over")
             print(self.dealer.show_all())
             self.game_over = True
 
-    def player_is_over(self, hand_num):
-        if self.player.hand.get_max_by_hand(hand_num) > 21:
+    def player_is_over(self):
+        # TODO
+        if self.player.hands[0].get_max_by_hand() > 21:
             print("Player Bust!")
             return True
         return False
 
-    def check_final_result(self, hand_num):
+    def check_final_result(self):
         print("Final Results : ")
-        self.player.hand.display("player")
-        self.dealer.hand.display("dealer")
+        self.player.display()
+        self.dealer.show_all()
 
-        player_value = self.player.hand.get_max_by_hand(hand_num)
-        dealer_value = self.dealer.hand.get_max_by_hand(hand_num)
+        # TODO
+        player_value = self.player.hands[0].get_max_by_hand()
+        dealer_value = self.dealer.hand.get_max_by_hand()
 
         if dealer_value > 21:
             print("Dealer Bust")
@@ -105,9 +109,9 @@ class Game:
             print("Thanks for playing!")
             self.playing = False
         else:
-            # Refresh hand
+            # TODO Refresh hand
             self.dealer = Dealer(Hand())
-            self.player = Player(Hand())
+            self.player = Player("tutu", [Hand()])
             # Reset flag
             self.player_turn = True
             self.game_over = False

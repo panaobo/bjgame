@@ -7,14 +7,23 @@ class Strategy:
     @staticmethod
     def dealer_strategy(hand, deck):
         # Dealer should just have 1 hand
-        hand_num = 1
         while True:
-            if hand.get_hard_hand(hand_num) >= 17:
+            if hand.get_hard_hand() >= 17:
                 break
-            elif hand.get_soft_hand(hand_num) > 17:
-                if hand.get_hard_hand(hand_num) < 17:
-                    hand.add_card(deck.deal(), hand_num)
+            elif 21 >= hand.get_soft_hand() > 17:
                 break
             else:
-                hand.add_card(deck.deal(), hand_num)
+                hand.add_card(deck.deal())
 
+    # Basic player strategy
+    # No Split or Double down
+    @staticmethod
+    def player_strategy(hand, deck):
+        while True:
+            while True:
+                if hand.get_hard_hand() >= 17:
+                    break
+                elif 21 >= hand.get_soft_hand() > 17:
+                    break
+                else:
+                    hand.add_card(deck.deal())
