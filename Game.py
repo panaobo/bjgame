@@ -19,6 +19,8 @@ class Game:
         self.playing = True
         # Control one hand
         self.game_over = False
+        # Control player decision round
+        self.player_turn = True
 
     def play(self):
 
@@ -34,30 +36,36 @@ class Game:
             self.check_blackjack()
 
             while not self.game_over:
-                hand = 1
-                player_turn = True
+                hand_num = 1
 
                 # Player's turn
-                choice = input("Please choose [Hit / Stick] ").lower()
-                while choice not in ["h", "s", "hit", "stick"] and player_turn:
-                    choice = input("Please enter 'hit' or 'stick' (or H/S) ").lower()
+                print()
+                choice = input("Please enter 'hit' or 'stand' (or H/S) ").lower()
+                while choice in ["h", "s", "hit", "stick"] and self.player_turn:
 
                     if choice in ['hit', 'h']:
-                        self.player.hand.add_card(self.deck.deal(), 1)
+                        print("___Player Hit___")
+                        self.player.hand.add_card(self.deck.deal(), hand_num)
                         self.player.display()
-                    elif choice in ['stick', 's']:
-                        player_turn = False
+                    elif choice in ['stand', 's']:
+                        self.player_turn = False
+                        break
 
-                    if self.player_is_over(hand):
+                    if self.player_is_over(hand_num):
                         self.game_over = True
-                        player_turn = False
+                        self.player_turn = False
                         print("You Lost!")
+                    else:
+                        choice = input("Please enter 'hit' or 'stick' (or H/S) ").lower()
 
                 # Dealer's turn
-                Strategy.dealer_strategy(self.dealer.hand, self.deck)
-                self.check_final_result(hand)
-                self.play_again()
-                self.game_over = True
+                if self.game_over:
+                    self.dealer.show_all()
+                else:
+                    Strategy.dealer_strategy(self.dealer.hand, self.deck)
+                    self.check_final_result(hand_num)
+                    self.game_over = True
+            self.play_again()
 
     def check_blackjack(self):
         if self.player.hand.get_max_by_hand(1) == 21 or self.dealer.hand.get_max_by_hand(1) == 21:
@@ -65,23 +73,29 @@ class Game:
             print(self.dealer.show_all())
             self.game_over = True
 
-    def player_is_over(self, hand):
-        return self.player.hand.get_max_by_hand(hand) > 21
+    def player_is_over(self, hand_num):
+        if self.player.hand.get_max_by_hand(hand_num) > 21:
+            print("Player Bust!")
+            return True
+        return False
 
-    def check_final_result(self, hand):
-        print("Final Results")
-        print("Your Hand: ", self.player.hand.display())
-        print("Dealer's Hand: ", self.dealer.hand.display())
+    def check_final_result(self, hand_num):
+        print("Final Results : ")
+        self.player.hand.display("player")
+        self.dealer.hand.display("dealer")
 
-        player_value = self.player.hand.get_max_by_hand(hand)
-        dealer_value = self.dealer.hand.get_max_by_hand(hand)
+        player_value = self.player.hand.get_max_by_hand(hand_num)
+        dealer_value = self.dealer.hand.get_max_by_hand(hand_num)
 
-        if player_value > dealer_value:
+        if dealer_value > 21:
+            print("Dealer Bust")
             print("Player Win!")
-        elif dealer_value > player_value:
-            print("Dealer Win!")
-        else:
+        elif dealer_value == player_value:
             print("Draw Game!")
+        elif player_value > dealer_value:
+            print("Player Win!")
+        else:
+            print("Dealer Win!")
 
     def play_again(self):
         again = input("Play Again? [Y/N] ")
@@ -94,6 +108,9 @@ class Game:
             # Refresh hand
             self.dealer = Dealer(Hand())
             self.player = Player(Hand())
+            # Reset flag
+            self.player_turn = True
+            self.game_over = False
 
 
 if __name__ == "__main__":

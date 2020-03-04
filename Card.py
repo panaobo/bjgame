@@ -4,7 +4,7 @@ class Card:
         self.value = value
 
     def __str__(self):
-        return " of ".join((self.suit, self.value))
+        return " of ".join((self.value, self.suit))
 
     def get_suit(self):
         return self.suit

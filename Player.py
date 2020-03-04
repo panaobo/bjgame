@@ -4,4 +4,4 @@ class Player:
         self.hand = hand
 
     def display(self):
-        self.hand.display()
+        self.hand.display("Player")

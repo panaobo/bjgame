@@ -13,4 +13,4 @@ class Dealer:
         print("***** Dealer's Hand End *****")
 
     def show_all(self):
-        print("Dealer's card : ", self.hand.cards[0])
+        print("Dealer's card : {}".format(self.hand))
